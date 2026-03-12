@@ -18,7 +18,7 @@ Visual Studio Code (VS Code) is a free, lightweight, and powerful code editor de
 
 Python is one of the most popular and beginner-friendly programming languages in the world. Its clean, readable syntax makes it an excellent first language, and its vast ecosystem of libraries — including NumPy, pandas, and frameworks like LangChain and TensorFlow — makes it the go-to language for data science, machine learning, and AI development. Learning Python gives you a powerful, versatile skill that is in high demand across virtually every industry.
 
-> **Note:** Please download **Python 3.14** specifically. This is the version we will use this summer.  As you begin your courses at CMU, you may have to install different versions of Python to satisfy various project package dependencies.
+> **Note:** Please download **Python 3.14** specifically. This is the version we will use this summer. As you begin your courses at CMU, you may have to install different versions of Python to satisfy various project package dependencies.
 
 **Download and installation instructions:** [Python Downloads](https://www.python.org/downloads/)
 
@@ -44,9 +44,27 @@ Git is a free, open-source version control system that tracks changes to your co
 
 ## 5. Docker Desktop
 
-Docker is a container application platform that allows developers to build, run, and manage containers.  Containers allow developers to create immutable, reusable systems for better reliability, reproducibility, and deployability.  Most modern cloud systems utilize some sort of container runtime such as Docker.
+Docker is a container application platform that allows developers to build, run, and manage containers. Containers allow developers to create immutable, reusable systems for better reliability, reproducibility, and deployability. Most modern cloud systems utilize some sort of container runtime such as Docker.
 
-**Download and installation instructions:** [Install Docker Desktkop](https://docs.docker.com/desktop/setup/install/windows-install/)
+**Download and installation instructions:** [Install Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)
+
+---
+
+## 6. Terraform
+
+Terraform is an open-source infrastructure-as-code (IaC) tool developed by HashiCorp. It allows developers and engineers to define, provision, and manage cloud infrastructure using a declarative configuration language called HCL (HashiCorp Configuration Language). Rather than manually clicking through cloud provider dashboards, Terraform lets you describe your desired infrastructure in code, version it with Git, and apply it consistently across environments. It is widely used in the industry for managing resources on AWS, Azure, Google Cloud, and many other providers.
+
+**Download and installation instructions:** [Install | Terraform | HashiCorp Developer](https://developer.hashicorp.com/terraform/install)
+
+---
+
+## 7. Azure CLI (az)
+
+The Azure Command-Line Interface (Azure CLI) is a cross-platform tool that allows you to manage and interact with Microsoft Azure resources directly from your terminal. Using the `az` command, you can create and configure cloud services, manage subscriptions, deploy applications, and automate workflows — all without leaving the command line. The Azure CLI is an essential tool for anyone working with Azure-hosted applications or cloud infrastructure, and it integrates well with scripts and CI/CD pipelines.
+
+> **Important:** Windows users should install the Azure CLI inside their WSL environment to ensure compatibility with Linux-based tooling and scripts used throughout this program.
+
+**Download and installation instructions:** [Install the Azure CLI on Windows | Microsoft Learn](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows)
 
 ---
 
@@ -56,15 +74,14 @@ You will need the following accounts to help facilitate your work this summer an
 
 ## 1. GitHub
 
-GitHub is a Microsoft web application that hosts git repositories.  You will need an account to interact with remote repositories on GitHub such as this repository or your own code.  If you have your own personal account already, you can use that as well.
+GitHub is a Microsoft web application that hosts git repositories. You will need an account to interact with remote repositories on GitHub such as this repository or your own code. If you have your own personal account already, you can use that as well.
 
 **Sign Up:** [Sign up for GitHub](https://github.com/signup)
 
 ## 2. Docker Hub
 
-Docker Hub is a platform for managing container images.  Creating a Docker Hub account will remove certain rate limits for image downloads and other container operations.  If you have your own personal account already, you can use that as well.
+Docker Hub is a platform for managing container images. Creating a Docker Hub account will remove certain rate limits for image downloads and other container operations. If you have your own personal account already, you can use that as well.
 
 **Sign Up:** [Create your account](https://app.docker.com/signup)
 
 > **Important:** After creating your account, [Sign in to Docker Desktop](https://docs.docker.com/desktop/setup/sign-in/).
-
