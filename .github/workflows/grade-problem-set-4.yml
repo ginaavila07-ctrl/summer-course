@@ -23,7 +23,8 @@ jobs:
               with:
                   python-version: "3.12"
                   cache: "pip"
-            - run: pip install pytest pytest-github-actions-annotate-failures
+                  cache-dependency-path: ".github/python_tests/requirements.txt"
+            - run: pip install -r .github/python_tests/requirements.txt
 
             - name: "process_reports()"
               continue-on-error: true
@@ -58,7 +59,8 @@ jobs:
     #           with:
     #               python-version: "3.12"
     #               cache: "pip"
-    #         - run: pip install pytest pytest-github-actions-annotate-failures
+    #               cache-dependency-path: ".github/python_tests/requirements.txt"
+    #         - run: pip install -r .github/python_tests/requirements.txt
 
     #         - name: "can_make()"
     #           continue-on-error: true
@@ -81,7 +83,8 @@ jobs:
     #           with:
     #               python-version: "3.12"
     #               cache: "pip"
-    #         - run: pip install pytest pytest-github-actions-annotate-failures
+    #               cache-dependency-path: ".github/python_tests/requirements.txt"
+    #         - run: pip install -r .github/python_tests/requirements.txt
 
     #         - name: "word_count()"
     #           continue-on-error: true
@@ -104,7 +107,8 @@ jobs:
               with:
                   python-version: "3.12"
                   cache: "pip"
-            - run: pip install pytest pytest-github-actions-annotate-failures
+                  cache-dependency-path: ".github/python_tests/requirements.txt"
+            - run: pip install -r .github/python_tests/requirements.txt
 
             - name: "Run all tests"
               run: >
