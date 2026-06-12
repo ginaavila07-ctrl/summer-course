@@ -39,6 +39,16 @@ jobs:
                   pytest .github/python_tests/test_problem_set_5.py::TestPalindromeChecker
                   -v --tb=short --no-header --color=yes -s
 
+            - name: "List Length"
+              run: >
+                  pytest .github/python_tests/test_problem_set_5.py::TestListLength
+                  -v --tb=short --no-header --color=yes -s
+
+            - name: "Flatten (challenge)"
+              run: >
+                  pytest .github/python_tests/test_problem_set_5.py::TestFlatten
+                  -v --tb=short --no-header --color=yes -s
+
     problem-2:
         name: "Problem 2 — Multiple Recursion"
         runs-on: ubuntu-latest
