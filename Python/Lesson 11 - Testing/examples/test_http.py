@@ -11,14 +11,14 @@ def test_get_user_name_success(mocker):
     mock_response.json.return_value = {"name": "Alice"}
 
     # Patch requests.get to return our mock response
-    mocker.patch("app.requests.get", return_value=mock_response)
+    mocker.patch("http.requests.get", return_value=mock_response)
 
     # Call the function under test
     result = get_user_name(123)
 
     # Assertions
     assert result == "Alice"
-    app_requests_get = mocker.patch("app.requests.get")
+    app_requests_get = mocker.patch("http.requests.get")
     app_requests_get.assert_called_once_with("https://api.example.com/users/123")
 
 
@@ -28,7 +28,7 @@ def test_get_user_name_failure(mocker):
     mock_response.status_code = 404
     mock_response.json.return_value = {}
 
-    mocker.patch("app.requests.get", return_value=mock_response)
+    mocker.patch("http.requests.get", return_value=mock_response)
 
     result = get_user_name(999)
     assert result is None
