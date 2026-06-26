@@ -1,3 +1,4 @@
 pytest
 pytest-github-actions-annotate-failures
+pytest-mock
 requests

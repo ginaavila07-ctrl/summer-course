@@ -764,3 +764,349 @@ class TestPartialUpdateUser:
 # ===========================================================================
 # Problem 4
 # ===========================================================================
+class TestSearchMovie:
+    """Tests for problem 4, search_movie function"""
+
+    def test_search_movie_exists(self, student):
+        assert_has_function(student, "search_movie")
+
+    def test_search_movie_valid(self, student, mocker):
+        """Test searching for a movie with valid API key"""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "results": [
+                {
+                    "id": 550,
+                    "title": "Fight Club",
+                    "release_date": "1999-10-15",
+                    "overview": "A ticking-time-bomb insomniac...",
+                    "vote_average": 8.4,
+                }
+            ]
+        }
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.search_movie("fake_api_key", "Fight Club")
+        assert isinstance(result, dict), "search_movie should return a dictionary"
+        assert result.get("id") == 550, "Should return the first result"
+        assert result.get("title") == "Fight Club", "Title should match"
+
+    def test_search_movie_multiple_results(self, student, mocker):
+        """Test that only the first result is returned"""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "results": [
+                {"id": 1, "title": "Movie One"},
+                {"id": 2, "title": "Movie Two"},
+                {"id": 3, "title": "Movie Three"},
+            ]
+        }
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.search_movie("fake_api_key", "Movie")
+        assert result.get("id") == 1, "Should return the first result only"
+
+    def test_search_movie_no_results(self, student, mocker):
+        """Test when no movies are found"""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {"results": []}
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.search_movie("fake_api_key", "NonexistentMovie123456")
+        assert result == {}, "Should return empty dict when no results"
+
+    def test_search_movie_api_error(self, student, mocker):
+        """Test handling API errors"""
+        mock_response = Mock()
+        mock_response.status_code = 401
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.search_movie("invalid_key", "Fight Club")
+        assert result == {}, "Should return empty dict on API error"
+
+
+class TestGetGithubUser:
+    """Tests for problem 4, get_github_user function"""
+
+    def test_get_github_user_exists(self, student):
+        assert_has_function(student, "get_github_user")
+
+    def test_get_github_user_valid(self, student, mocker):
+        """Test getting a valid GitHub user"""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "login": "octocat",
+            "id": 1,
+            "name": "The Octocat",
+            "company": "GitHub",
+            "blog": "https://github.blog",
+            "location": "San Francisco",
+            "email": None,
+            "bio": "GitHub mascot",
+            "public_repos": 8,
+            "followers": 1000,
+            "following": 5,
+        }
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_github_user("fake_token", "octocat")
+        assert isinstance(result, dict), "get_github_user should return a dictionary"
+        assert result.get("login") == "octocat", "Login should match"
+        assert result.get("id") == 1, "ID should match"
+        assert "public_repos" in result, "Should include public_repos"
+
+    def test_get_github_user_different_users(self, student, mocker):
+        """Test getting different users"""
+        test_users = ["torvalds", "gvanrossum", "octocat"]
+        for username in test_users:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = {
+                "login": username,
+                "id": 12345,
+                "name": f"Test {username}",
+            }
+            mocker.patch("requests.get", return_value=mock_response)
+
+            result = student.get_github_user("fake_token", username)
+            assert result.get("login") == username, f"Login should be {username}"
+
+    def test_get_github_user_not_found(self, student, mocker):
+        """Test when user doesn't exist"""
+        mock_response = Mock()
+        mock_response.status_code = 404
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_github_user("fake_token", "nonexistentuser123456789")
+        assert result == {}, "Should return empty dict when user not found"
+
+    def test_get_github_user_invalid_token(self, student, mocker):
+        """Test with invalid authentication token"""
+        mock_response = Mock()
+        mock_response.status_code = 401
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_github_user("invalid_token", "octocat")
+        assert result == {}, "Should return empty dict with invalid token"
+
+
+class TestCreateGist:
+    """Tests for problem 4, create_gist function"""
+
+    def test_create_gist_exists(self, student):
+        assert_has_function(student, "create_gist")
+
+    def test_create_gist_valid(self, student, mocker):
+        """Test creating a gist successfully"""
+        mock_response = Mock()
+        mock_response.status_code = 201
+        mock_response.json.return_value = {
+            "id": "abc123def456",
+            "url": "https://api.github.com/gists/abc123def456",
+            "html_url": "https://gist.github.com/abc123def456",
+            "files": {"test.py": {"filename": "test.py", "content": "print('Hello, World!')"}},
+            "description": "Test gist",
+            "public": True,
+        }
+        mocker.patch("requests.post", return_value=mock_response)
+
+        result = student.create_gist("fake_token", "Test gist", "test.py", "print('Hello, World!')")
+        assert isinstance(result, str), "create_gist should return a string"
+        assert result == "abc123def456", "Should return the gist ID"
+
+    def test_create_gist_different_files(self, student, mocker):
+        """Test creating gists with different filenames and content"""
+        test_cases = [
+            ("example.js", "console.log('test');", "JavaScript example"),
+            ("README.md", "# My Project", "Markdown readme"),
+            ("config.json", '{"key": "value"}', "JSON config"),
+        ]
+
+        for filename, content, description in test_cases:
+            mock_response = Mock()
+            mock_response.status_code = 201
+            mock_response.json.return_value = {"id": f"gist_{filename}"}
+            mocker.patch("requests.post", return_value=mock_response)
+
+            result = student.create_gist("fake_token", description, filename, content)
+            assert result == f"gist_{filename}", f"Should return gist ID for {filename}"
+
+    def test_create_gist_api_error(self, student, mocker):
+        """Test handling API errors"""
+        mock_response = Mock()
+        mock_response.status_code = 401
+        mocker.patch("requests.post", return_value=mock_response)
+
+        result = student.create_gist("invalid_token", "Test", "test.txt", "content")
+        assert result == "", "Should return empty string on API error"
+
+    def test_create_gist_no_id_in_response(self, student, mocker):
+        """Test when API doesn't return an ID"""
+        mock_response = Mock()
+        mock_response.status_code = 201
+        mock_response.json.return_value = {}
+        mocker.patch("requests.post", return_value=mock_response)
+
+        result = student.create_gist("fake_token", "Test", "test.txt", "content")
+        assert result == "", "Should return empty string when no ID in response"
+
+
+class TestDeleteGist:
+    """Tests for problem 4, delete_gist function"""
+
+    def test_delete_gist_exists(self, student):
+        assert_has_function(student, "delete_gist")
+
+    def test_delete_gist_success(self, student, mocker):
+        """Test successfully deleting a gist"""
+        mock_response = Mock()
+        mock_response.status_code = 204
+        mocker.patch("requests.delete", return_value=mock_response)
+
+        result = student.delete_gist("fake_token", "abc123def456")
+        assert result is True, "delete_gist should return True on successful deletion"
+
+    def test_delete_gist_multiple(self, student, mocker):
+        """Test deleting multiple gists"""
+        mock_response = Mock()
+        mock_response.status_code = 204
+        mocker.patch("requests.delete", return_value=mock_response)
+
+        gist_ids = ["gist1", "gist2", "gist3"]
+        for gist_id in gist_ids:
+            result = student.delete_gist("fake_token", gist_id)
+            assert result is True, f"Should return True for deleting {gist_id}"
+
+    def test_delete_gist_not_found(self, student, mocker):
+        """Test deleting a non-existent gist"""
+        mock_response = Mock()
+        mock_response.status_code = 404
+        mocker.patch("requests.delete", return_value=mock_response)
+
+        result = student.delete_gist("fake_token", "nonexistent")
+        assert result is False, "Should return False when gist not found"
+
+    def test_delete_gist_unauthorized(self, student, mocker):
+        """Test deleting with invalid token"""
+        mock_response = Mock()
+        mock_response.status_code = 401
+        mocker.patch("requests.delete", return_value=mock_response)
+
+        result = student.delete_gist("invalid_token", "abc123")
+        assert result is False, "Should return False with invalid token"
+
+    def test_delete_gist_forbidden(self, student, mocker):
+        """Test deleting a gist you don't own"""
+        mock_response = Mock()
+        mock_response.status_code = 403
+        mocker.patch("requests.delete", return_value=mock_response)
+
+        result = student.delete_gist("fake_token", "someone_elses_gist")
+        assert result is False, "Should return False when forbidden"
+
+
+@pytest.mark.challenge
+class TestGetSpotifyTrackInfo:
+    """Tests for problem 4, get_spotify_track_info function (challenge)"""
+
+    def test_get_spotify_track_info_exists(self, student):
+        assert_has_function(student, "get_spotify_track_info")
+
+    def test_get_spotify_track_info_valid(self, student, mocker):
+        """Test getting valid track information"""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "id": "3n3Ppam7vgaVa1iaRUc9Lp",
+            "name": "Mr. Brightside",
+            "artists": [{"name": "The Killers", "id": "0C0XlULifJtAgn6ZNCW2eu"}],
+            "album": {"name": "Hot Fuss", "release_date": "2004-06-07"},
+            "duration_ms": 222973,
+            "popularity": 85,
+        }
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_spotify_track_info("fake_access_token", "3n3Ppam7vgaVa1iaRUc9Lp")
+        assert isinstance(result, dict), "get_spotify_track_info should return a dictionary"
+        assert result.get("name") == "Mr. Brightside", "Track name should match"
+        assert result.get("artist") == "The Killers", "Artist name should match"
+        assert result.get("album") == "Hot Fuss", "Album name should match"
+        assert result.get("duration_ms") == 222973, "Duration should match"
+
+    def test_get_spotify_track_info_multiple_artists(self, student, mocker):
+        """Test track with multiple artists (should return first artist)"""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "name": "Collaboration Song",
+            "artists": [{"name": "Artist One"}, {"name": "Artist Two"}, {"name": "Artist Three"}],
+            "album": {"name": "Collab Album"},
+            "duration_ms": 180000,
+        }
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_spotify_track_info("fake_access_token", "track123")
+        assert result.get("artist") == "Artist One", "Should return the first artist"
+
+    def test_get_spotify_track_info_different_tracks(self, student, mocker):
+        """Test getting information for different tracks"""
+        test_tracks = [
+            ("track1", "Song A", "Band A", "Album A", 200000),
+            ("track2", "Song B", "Band B", "Album B", 250000),
+            ("track3", "Song C", "Band C", "Album C", 180000),
+        ]
+
+        for track_id, name, artist, album, duration in test_tracks:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = {
+                "name": name,
+                "artists": [{"name": artist}],
+                "album": {"name": album},
+                "duration_ms": duration,
+            }
+            mocker.patch("requests.get", return_value=mock_response)
+
+            result = student.get_spotify_track_info("fake_token", track_id)
+            assert result["name"] == name, f"Track name should be {name}"
+            assert result["artist"] == artist, f"Artist should be {artist}"
+            assert result["album"] == album, f"Album should be {album}"
+            assert result["duration_ms"] == duration, f"Duration should be {duration}"
+
+    def test_get_spotify_track_info_not_found(self, student, mocker):
+        """Test when track doesn't exist"""
+        mock_response = Mock()
+        mock_response.status_code = 404
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_spotify_track_info("fake_token", "nonexistent_track")
+        assert result == {}, "Should return empty dict when track not found"
+
+    def test_get_spotify_track_info_invalid_token(self, student, mocker):
+        """Test with invalid access token"""
+        mock_response = Mock()
+        mock_response.status_code = 401
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_spotify_track_info("invalid_token", "track123")
+        assert result == {}, "Should return empty dict with invalid token"
+
+    def test_get_spotify_track_info_missing_fields(self, student, mocker):
+        """Test handling API response with missing fields"""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "name": "Incomplete Song"
+            # Missing artists, album, duration_ms
+        }
+        mocker.patch("requests.get", return_value=mock_response)
+
+        result = student.get_spotify_track_info("fake_token", "track123")
+        assert result.get("name") == "Incomplete Song", "Should have name"
+        assert result.get("artist") == "", "Should return empty string for missing artist"
+        assert result.get("album") == "", "Should return empty string for missing album"
+        assert result.get("duration_ms") == 0, "Should return 0 for missing duration"

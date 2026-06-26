@@ -144,9 +144,29 @@ jobs:
                   cache-dependency-path: ".github/python_tests/requirements.txt"
             - run: pip install -r .github/python_tests/requirements.txt
 
-            - name: "Animal class"
+            - name: "search_movie"
               run: >
-                  pytest .github/python_tests/test_problem_set_5.py::TestAnimalClass
+                  pytest .github/python_tests/test_problem_set_5.py::TestSearchMovie
+                  -v --tb=short --no-header --color=yes -s
+
+            - name: "get_github_user"
+              run: >
+                  pytest .github/python_tests/test_problem_set_5.py::TestGetGithubUser
+                  -v --tb=short --no-header --color=yes -s
+
+            - name: "create_gist"
+              run: >
+                  pytest .github/python_tests/test_problem_set_5.py::TestCreateGist
+                  -v --tb=short --no-header --color=yes -s
+
+            - name: "delete_gist"
+              run: >
+                  pytest .github/python_tests/test_problem_set_5.py::TestDeleteGist
+                  -v --tb=short --no-header --color=yes -s
+
+            - name: "get_spotify_track_info (challenge)"
+              run: >
+                  pytest .github/python_tests/test_problem_set_5.py::TestGetSpotifyTrackInfo
                   -v --tb=short --no-header --color=yes -s
 
     # ---------------------------------------------------------------------------
