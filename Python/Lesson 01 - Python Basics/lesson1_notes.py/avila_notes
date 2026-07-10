@@ -1,0 +1,62 @@
+print("hello")
+
+
+name = input("what is your name?")
+number = input("what is your favorite number")
+minus10 =10
+print("hello",name)
+print("Your favorite numner is", number)
+
+print("your favorite number minus 10 is", int(number)-10)
+
+print(1,2,3,4, sep =",")
+
+pizza_size1 = input("what is the size of pizza 1")
+pizza_size2 = input("what is the size of pizza 2")
+pizza_size3 = input("what is the size of pizza 3")
+
+pizza_area1= int(pizza_size1) / 2
+pizza_area2= int(pizza_size2) / 2
+pizza_area3= int(pizza_size3) / 2
+print(pizza_area1)
+print(pizza_area1)
+print(pizza_area3)
+
+
+
+costumer_cost1 = input("what is the total price of pizza 1?")
+costumer_cost2 = input("what is the total price of pizza 2?")
+costumer_cost3 = input("what is the total price of pizza 3?")
+
+
+price_prearea1 = float(pizza_size1) /2
+price_prearea2 = float(pizza_size1) /2
+price_prearea3 = float(pizza_size1) /2
+
+total_prearea1 = float(price_prearea1)/float(costumer_cost1)
+total_prearea2 = float(price_prearea2)/float(costumer_cost2)
+total_prearea3 = float(price_prearea1)/float(costumer_cost3)
+
+print("your total price per area for pizza 1 is", total_prearea1)
+
+print("your total price per area for pizza 1 is", total_prearea2)
+
+print("your total price per area for pizza 1 is", total_prearea3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
