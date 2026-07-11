@@ -11,37 +11,52 @@ print("your favorite number minus 10 is", int(number)-10)
 
 print(1,2,3,4, sep =",")
 
-pizza_size1 = input("what is the size of pizza 1")
-pizza_size2 = input("what is the size of pizza 2")
-pizza_size3 = input("what is the size of pizza 3")
+#Enter the Size of all 3 Pizza's
+pizza_size1 = input("what is the size of small pizza 1? ")
+pizza_size2 = input("what is the size of of small pizza 2? ")
+pizza_size3 = input("what is the size of large pizza? ")
 
-pizza_area1= int(pizza_size1) / 2
-pizza_area2= int(pizza_size2) / 2
-pizza_area3= int(pizza_size3) / 2
-print(pizza_area1)
-print(pizza_area1)
-print(pizza_area3)
+int(pizza_size1)
+int(pizza_size2)
+int(pizza_size3)
 
 
+#Calauate Pizza Radius
+sm_pizza_radius =(int(pizza_size1)+ int(pizza_size2)) /2
+lg_pizza_radius = int(pizza_size3)/2
 
-costumer_cost1 = input("what is the total price of pizza 1?")
-costumer_cost2 = input("what is the total price of pizza 2?")
-costumer_cost3 = input("what is the total price of pizza 3?")
+#Caculate the Pizza Area by dividing the Diameter of the Pizza by 2
+pizza_area1= 3.14 * float(sm_pizza_radius) /2
+pizza_area3= 3.14 * float(lg_pizza_radius ) /2 
 
 
-price_prearea1 = float(pizza_size1) /2
-price_prearea2 = float(pizza_size1) /2
-price_prearea3 = float(pizza_size1) /2
 
-total_prearea1 = float(price_prearea1)/float(costumer_cost1)
-total_prearea2 = float(price_prearea2)/float(costumer_cost2)
-total_prearea3 = float(price_prearea1)/float(costumer_cost3)
+#Print the Area of of both small Pizza and the Larage Pizza
+print("The total area of both small pizza is ", float(pizza_area1))
+print("The area of the large pizza is ", float(pizza_area3))
 
-print("your total price per area for pizza 1 is", total_prearea1)
 
-print("your total price per area for pizza 1 is", total_prearea2)
+#Enter the the Price of both small Pizza and the Large Pizza
+costumer_cost1 = input("what is the total price of the two small pizza's? ")
+costumer_cost3 = input("what is the total price of the large pizza? ")
 
-print("your total price per area for pizza 1 is", total_prearea3)
+#Change the cost into a decimal numer 
+costumer_cost1 = float(costumer_cost1)
+costumer_cost3 = float(costumer_cost3)
+
+# Toatl Area divided by Cost
+price_prearea1 = int(pizza_area1) / int(costumer_cost1)
+price_prearea3 = int(pizza_area3) / int(costumer_cost3)
+
+#Print Price per area for 2 small pizza's and 1 lage pizza
+print(f"Your total price per area for both small pizza is {price_prearea1:.02f}")
+
+print(f"Yur total price per area for a large pizza is {price_prearea3:.02f}")
+
+
+
+
+
 
 
 
