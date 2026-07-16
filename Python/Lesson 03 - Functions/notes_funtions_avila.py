@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # # lesson notes for lesson 3
 
 # for number in range(1,101):
@@ -135,4 +136,7 @@ print(more_charaters)
     
 
 
+=======
+# lesson notes for lesson 3
+>>>>>>> 47ac4912de2a2af3d2d4646ea786a60bdd653fbd
 
