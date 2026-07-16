@@ -75,43 +75,45 @@ These exercises are designed to help you practice using tools like `grep`, `wc`,
 
 ---
 
-### Exercise 5: GREP - Search Text
+### Exercise 5: GREP - Search Text  (Use grep --help) (control C to get out if you get stuck)
 
-1. Search for the word "Linux" in `file1.txt`.
+1. Search for the word "Linux" in `file1.txt`. ( grep "Linux" file1.txt )
    
 
-2. Search for lines **not** containing "Linux".
+2. Search for lines **not** containing "Linux". ( grep -v "Linux" file1.txt )
    
 
-3. Search recursively in all `.txt` files under the current directory.
+3. Search recursively in all `.txt` files under the current directory. (grep -r "Linux")
    
 
-4. Find lines starting with the word "Note".
+4. Find lines starting with the word "Note".  ( grep "Note" notes/note1.txt)
    
 
 ---
 
 ### Exercise 6: WC - Word/Line/Character Count
 
-1. Count the number of lines in `file2.txt`.
+1. Count the number of lines in `file2.txt`. ( wc -l file2.txt )
    
 
-2. Count the number of words and characters in `docs/doc1.txt`.
+2. Count the number of words and characters in `docs/doc1.txt`. ( wc -w docs/doc1.txt)
    
 
-3. Get a summary for all `.txt` files.
+3. Get a summary for all `.txt` files. (wc *.txt)
    
 ---
 
 ### Exercise 7: SSH - Remote Access
 
-1. Connect to the server that your instructor provided with the correct credentials.
+1. Connect to the server that your instructor provided with the correct credentials. (ssh user7@46.225.20.198)
    
 
-2. Run a remote command (e.g., list home directory files).
+2. Run a remote command (e.g., list home directory files). (ls)
    
 
 3. Copy a local file to the remote server.
+
+Command Failed, denied permissions: scp file1.txt user7@46.225.20.198:~
 
 
 4. Leave a message for your peers!

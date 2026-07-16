@@ -92,5 +92,3 @@ print(f"Gas @ ${second_price:.02f}: Total = ${second_price * gallons_needed:.02f
 print(f"Gas @ ${third_price:.02f}: Total = ${third_price * gallons_needed:.02f} ")
 
 
-
-

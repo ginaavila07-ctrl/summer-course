@@ -60,7 +60,9 @@ Welcome! These exercises are designed to help you get comfortable with basic Lin
 
 2. Use `less` or `more` to view `file2.txt`.
 
-### Exercise 3: File Management
+### Exercise 3: FileTerraform
+- download i386
+- extract file Management
 
 1. Copy `file2.txt` into the `docs` directory.
    ```bash

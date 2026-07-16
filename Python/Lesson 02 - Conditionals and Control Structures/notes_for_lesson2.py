@@ -76,3 +76,29 @@ elif score >= 60 :
     print("grade d")
 else:
     print("you failed")
+
+#list notes
+my_list = ["Gina", "is", 4, "so", "fun"]
+
+#index        0     1    2    3     4
+#            -5    -4    -3   -2    -1
+
+#my_list[4] = fun
+#my_list[-5] = Gina  
+#my_list[2] = 4
+#my_list[-1] = fun
+
+#print(my_list[0])
+#print(my_list[-5])
+
+#print(my_list[1:4])
+# this is will print out 'is', '4', '"so"
+
+#print(my_list[1:])
+# this would print out everythisng from and after is, 4, so, fun
+
+#print(my_list[1: 5:2])
+# this would print everything staritng a t 1 through 5 counting by 2  START STOP and Step
+
+
+
