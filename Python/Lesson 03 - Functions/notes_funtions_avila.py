@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # # lesson notes for lesson 3
 
 # for number in range(1,101):
@@ -106,14 +105,17 @@ print(f" Baseed on you total cost of {total} you should tip {tip_amount:.02f}")
 
 
 def has_more_characters (first_word:str, Second_word:str) -> str:
-    length1 = len(first_word)
+    length1 = len(first_word) 
     length2 = len(Second_word)
+    
     if (length1) < (length2):
-        return Second_word 
+        return f"Second_word has {length2} characters"  
+    
     elif (length1) > (length2):
-        return first_word 
+        return f"first_word has {length1} characters"
+    
     else:
-        return "they are equal"
+        return f"they are equal both strings have {length1} characters"
 
 
 more_charaters = has_more_characters ("sally", "tom")
@@ -124,19 +126,9 @@ print(more_charaters)
 # need to helpwith these make it also show how many characteres it is
 
 
+# need to know Visiual Studio Code: how to create vitrtual network. 
 
+# Thursday 1330 Class
+# Friday 1030 Class
 
-        
-
-
-
-
-
-
-    
-
-
-=======
-# lesson notes for lesson 3
->>>>>>> 47ac4912de2a2af3d2d4646ea786a60bdd653fbd
 
