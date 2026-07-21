@@ -1,0 +1,85 @@
+def greet(name):
+    message = "Hello, " + name
+    print(message)
+
+greet("Alice")
+
+
+# Error 1
+def calculate_total(price, quantity):
+    total = price * quantity
+    print(f"Total: {total}")
+    return total
+
+calculate_total(10, 5)
+
+# Error 2
+def greet(name):
+    print(f"Hello, {name}")
+
+greet("Bob")
+
+# Error 1
+
+user_name = "Charlie"
+print(user_name)
+
+# Error 2
+favorite_color = "blue"
+print(f"My favorite color is {favorite_color}")
+
+# Error 1
+age = 25
+message = "I am " +  str(age) + " years old"
+print(message)
+
+
+# Error 2
+quantity = 5
+price = 10.50
+total = quantity * price
+print(total)
+
+# Error 3
+scores = [85, 90, 78, 92]
+print(scores[2])
+
+# Error 1
+fruits = ["apple", "banana", "cherry"]
+print(fruits[-1])
+
+# Error 2
+shopping_list = ["milk","eggs","bread"]
+first_item = shopping_list[0]
+print(first_item)
+
+shopping_list = ["milk","eggs","bread"]
+if len(shopping_list) > 0:
+    first_item = shopping_list[0]
+    print(first_item)
+else:
+    print("Shopping list is empty")
+
+
+# Error 1
+student = {
+    "name": "Alice",
+    "age": 20,
+    "major": "Computer Science",
+    
+}
+grade = student.get("grade", "No grade available")
+print(grade)
+
+# Error 2
+inventory = {
+    "apples": 10,
+    "bananas": 5,
+    "oranges": 8
+}
+print(f"We have {inventory['apples']} apples")  # Missing 's'
+
+# Error 1
+text = "hello world"
+new_text = text + "!"
+print(new_text)

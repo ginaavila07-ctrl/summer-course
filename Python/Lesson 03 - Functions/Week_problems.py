@@ -190,55 +190,105 @@
 # HIGH:      1 hour
 
 
-reading_list = [21, 20, 19, 17, 16, 14, 13, 15, 18, 21, 22, 21]
+# reading_list = [21, 20, 19, 17, 16, 14, 13, 15, 18, 21, 22, 21]
 
 
 
 
-def O2_reading_status (level):
-    if level < 15:
-        return "Critical"
-    elif level <= 18:
-        return "Low"
-    elif level <= 23:
-        return "Normal"
-    else:
-        return "High"
+# def O2_reading_status (level):
+#     if level < 15:
+#         return "Critical"
+#     elif level <= 18:
+#         return "Low"
+#     elif level <= 23:
+#         return "Normal"
+#     else:
+#         return "High"
 
-critical_count = 0
-low_count = 0
-normal_count = 0
-high_count = 0
+# critical_count = 0
+# low_count = 0
+# normal_count = 0
+# high_count = 0
     
 
-print("====== Hour Break Down of Readings ======")
-print()
-print()
-for hour in range(1,13):
-    reading= reading_list[hour -1]
-    status = O2_reading_status(reading)
+# print("====== Hour Break Down of Readings ======")
+# print()
+# print()
+# for hour in range(1,13):
+#     reading= reading_list[hour -1]
+#     status = O2_reading_status(reading)
     
-    print(f"Hour {hour}: {reading}%  -- {status}")
-    if status == "Critical":
-        critical_count += 1
-        print(" *** ALERT: TAKE ACTION IMMEDIATELY *** ")
-    elif status == "Low":
-        low_count += 1
-    elif status == "Normal":
-        normal_count += 1
-    else:
-        high_count += 1
-print()
-print()
-print(f"========== STATUS SUMMARY ============")
-print()
-print(f"Crtical Status Count: {critical_count} Hours")
-print(f"Low Status Count:     {low_count} Hours")
-print(f"Normal Status Count:  {normal_count} Hours")
-print(f"High Status Count:    {high_count} Hours")
+#     print(f"Hour {hour}: {reading}%  -- {status}")
+#     if status == "Critical":
+#         critical_count += 1
+#         print(" *** ALERT: TAKE ACTION IMMEDIATELY *** ")
+#     elif status == "Low":
+#         low_count += 1
+#     elif status == "Normal":
+#         normal_count += 1
+#     else:
+#         high_count += 1
+# print()
+# print()
+# print(f"========== STATUS SUMMARY ============")
+# print()
+# print(f"Crtical Status Count: {critical_count} Hours")
+# print(f"Low Status Count:     {low_count} Hours")
+# print(f"Normal Status Count:  {normal_count} Hours")
+# print(f"High Status Count:    {high_count} Hours")
+
+
+#Problem 3 — RPG Character Battle 
+# You're simulating a turn-based battle between a hero and a monster. 
+# Each turn, the hero attacks the monster and then the monster strikes back — until one of them runs out of HP.
+
+# Your task:
+
+# Write a function attack(defender_hp, damage) that subtracts damage from defender HP and returns the new HP (minimum 0).
+# Write a function is_alive(hp) that returns True if HP > 0.
+# Use a while loop to simulate the battle. Each round:
+# The hero deals 18 damage to the monster.
+# If the monster is still alive, it deals 12 damage to the hero.
+# Print the round number and both HP values after each exchange.
+# End the loop when either combatant reaches 0 HP.
+# Use conditionals after the loop to print who won.
+# Starting values:
+
+# hero_hp = 100
+# monster_hp = 90
+# Expected output (partial):
+
+# === BATTLE START ===
+# Round 1:  Hero HP: 88   |  Monster HP: 72
+# Round 2:  Hero HP: 76   |  Monster HP: 54
+# Round 3:  Hero HP: 64   |  Monster HP: 36
+# ...
+# HERO WINS! The monster has been defeated.
 
 
 
+
+def attack(defender_hp, damage):
+    new_def_hp = defender_hp - damage
+    
+    return max(0, new_def_hp)
+
+def alive(hp):
+
+count = 1
+
+
+hero_hp = 100
+monster_hp = 90
+monster_damage = 18
+hero-damage = 12
+
+while hero_hp > 0:
+    count += 1
+    if monster_hp >0 :
+        monster_hp - 18
+
+        
 
 
 
