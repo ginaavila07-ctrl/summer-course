@@ -200,30 +200,49 @@ def make_line(length):
 print(make_line(10)) 
 
 
-import math
+# import math
 # population = 1000000
 # initial_infected = 1000
 # r_number = 1.1
 
 
-def simulate_infection(population, initial_infected, r_number):
-    infected = initial_infected
-    deceased = 0
-    day = 1
+# def simulate_infection(population, initial_infected, r_number):
+#     infected = initial_infected
+#     deceased = 0
+#     day = 1
 
-    print(day, population - deceased)
+#     print(day, population - deceased)
 
-    while population - deceased > 0:
-        deceased = deceased + infected
-        infected = math.ceil(infected * r_number)
+#     while population - deceased > 0:
+#         deceased = deceased + infected
+#         infected = math.ceil(infected * r_number)
 
-        day = day + 1
+#         day = day + 1
 
-        alive = population - deceased
+#         alive = population - deceased
 
-        if alive < 0:
-            alive = 0
+#         if alive < 0:
+#             alive = 0
 
-        print(day, alive)
+#         print(day, alive)
 
-simulate_infection(1000000, 1000, 1.1)
+# simulate_infection(1000000, 1000, 1.1)
+
+import math
+
+def compound_interest(init_principal:float,acc_rate:float,acc_cmp_freq:int,years:int):
+    if acc_cmp_freq == 0:
+        A = init_principal * math.e **(acc_rate*years)
+        return A
+    else:
+        A=  init_principal*(1+(acc_rate/acc_cmp_freq))**(acc_cmp_freq*years)
+        return A
+
+def simulate_account_balance(init_principal:float,acc_rate:float,acc_cmp_freq:int, setup_fee:float, years:int):
+
+
+    for year in range (2, years + 1, 2):
+
+        balance = compound_interest(init_principal - setup_fee, acc_rate, acc_cmp_freq, year)
+
+        

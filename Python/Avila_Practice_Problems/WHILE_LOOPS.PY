@@ -71,7 +71,24 @@ def is_ordered(letters):
         return False
 
 def is_ordered(text):
-    text = text.lower()
-    for i in range(len(text)):
-        print(text[i])
+    for i in range(len(text)-1):
+        if text[i].lower() > text[i + 1].lower():
+            return False
+
+    return True
+
+text = input("Enter String:  ")
+if is_ordered(text):
+    print(f'{text} is aplhabetically in order')
+else:
+    print("is in order")
+
 print(is_ordered('abcde'))
+
+with open("mt_file.txt") as f:
+    text = f.read()
+    print(text)
+
+with open("mt_file.txt") as f:
+    for line in f:
+        print(line)

@@ -218,7 +218,7 @@ assert remove_tag('[SKIP] ') == ''
 assert remove_tag('[HIGH]     spaced out') == 'spaced out'
 assert remove_tag('Temperature: [HIGH]') == 'Temperature: [HIGH]'
 
-
+########################################################################
 
 # The helper functions handle(), truncate(), tag(), priority() are already
 # written for you. They are the same tools you built in Tasks 1-3.
@@ -231,7 +231,7 @@ def truncate(text, limit=20, suffix='...'):
     if len(text) <= limit:
         return text
     else:
-        return text[:limit-len(suffix)] + suffix
+        return text[:limit] + suffix
 
 
 def tag(message, label='INFO'):
@@ -245,6 +245,8 @@ def priority(message):
         return "high"
     elif 'are you there?' in message.lower():
         return "question"
+    elif '!' in message or '?' in message:
+        return "high"
     elif message.isupper():
         return "high"
     else:
@@ -262,13 +264,24 @@ def preview(name, message):
 
 
 def format_notification(name, message):
-    formatted_name = handle(name)
-    formatted_message = truncate(message)
-    message_priority = priority(message)
+    return tag(preview(name, message), priority(message))
 
-    return tag(formatted_name + ": " + formatted_message, message_priority)
 
-print(preview('ada lovelace', 'hello there everyone how are you'))
+def read_label(line):
+    if line.startswith("[") and "]" in line:
+        return line[1:line.index("]")]
+    else:
+        return ""
+
+
+def remove_tag(line):
+    if line.startswith("[") and "]" in line:
+        return line[line.index("]") + 1:].strip()
+    else:
+        return line
+
+
+
 
 assert format_notification('ada lovelace',
                            'the server is completely DOWN!') == \
